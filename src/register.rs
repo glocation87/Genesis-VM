@@ -43,12 +43,12 @@ impl Register {
 
     pub fn print(&self, register: &'static str) {
         match register {
-            "eax" => println!("{}", self.eax),
-            "ebx" => println!("{}", self.ebx),
-            "ecx" => println!("{}", self.ecx),
-            "rax" => println!("{}", self.rax),
-            "rbx" => println!("{}", self.rbx),
-            "rcx" => println!("{}", self.rcx),
+            "eax" => println!("GVM EAX[ {} ]", self.eax),
+            "ebx" => println!("GVM EBX[ {} ]", self.ebx),
+            "ecx" => println!("GVM ECX[ {} ]", self.ecx),
+            "rax" => println!("GVM RAX[ {} ]", self.rax),
+            "rbx" => println!("GVM RBX[ {} ]", self.rbx),
+            "rcx" => println!("GVM RCX[ {} ]", self.rcx),
             _ => panic!("Invalid register name"),
         }
     }

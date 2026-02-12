@@ -1,21 +1,24 @@
+
 pub enum OpCode {
     // Register Operations
-    MOV, // MOV [to] [from]- store into register
-    SUB, // SUB [registerOne] [registerTwo]
-    ADD, // ADD [registerOne] [registerTwo]
-    MUL, // MUL [registerOne] [registerTwo]
-    DIV, // DIV [registerOne] [registerTwo]
+    MOV = 0x01F, // MOV [to] [from]- store into register
+    SUB = 0x02F, // SUB [registerOne] [registerTwo]
+    ADD = 0x03F, // ADD [registerOne] [registerTwo]
+    MUL = 0x04F, // MUL [registerOne] [registerTwo]
+    DIV = 0x05F, // DIV [registerOne] [registerTwo]
 
     // Control Flow
-    JMP, // JMP [address] - unconditional jump set RIP to address
-    JIF, // JIF [address] - jump if register flag is false after conditional operation [CMP or LT]
+    JMP = 0x06F, // JMP [address] - unconditional jump set RIP to address
+    JIF = 0x07F, // JIF [address] - jump if register flag is false after conditional operation [CMP or LT]
 
     // Conditional Operations
-    CMP, // CMP [registerOne] [registerTwo] - Check if both values are the same and sets a register flag to true
-    LT, // LT [registerOne] [registerTwo] - Less than
+    CMP = 0x08F, // CMP [registerOne] [registerTwo] - Check if both values are the same and sets a register flag to true
+    LT = 0x09F, // LT [registerOne] [registerTwo] - Less than
 
-    PRNT, // PRNT [register] - prints value in register
-    PRNTA, // PRNTA [register] - prints address of value stored in register
+    PRNT = 0x0FF, // PRNT [register] - prints value in register
+    PRNTA = 0x0FFD, // PRNTA [register] - prints address of value stored in register
+
+    HALT = 0x0FFF
 }
 
 #[derive(Debug, Clone)]
@@ -29,11 +32,4 @@ pub struct Instruction {
     pub opcode: OpCode,
     pub arg_one: Args,
     pub arg_two: Args,
-}
-
-impl Instruction {      
-    pub fn new(opcode: OpCode, arg_one: Args, arg_two: Args) -> Self {
-        return Instruction { opcode, arg_one, arg_two };
-    }
-    
 }

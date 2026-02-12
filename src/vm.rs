@@ -4,7 +4,7 @@ use crate::memory::Memory;
 use crate::register::Register;
 use crate::opcode::{Instruction, OpCode, Args};
 
-struct VirtualMachine {
+pub struct VirtualMachine {
     register: Register,
     memory: Memory,
 }
@@ -34,6 +34,14 @@ impl VirtualMachine {
                     Args::Null(_) => panic!("Cannot move null value into register"),
                 }
                 
+            }
+
+            OpCode::PRNT => {
+                let register: Args = instruction.arg_one;
+                match register {
+                    Args::Strings(reg) => self.register.print(reg), // print value in register
+                    _ => panic!("Invalid argument for PRINT operation"), // PRINT can only print values from registers
+                }
             }
             // Implement other opcodes similarly...
             _ => {}
