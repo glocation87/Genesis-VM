@@ -6,5 +6,10 @@ mod register;
 mod opcode;
 
 fn main() {
-    let vm = VirtualMachine::new();
+    let mut vm = VirtualMachine::new();
+    // Example usage
+    /*register.mov("eax", 10);
+    register.mov("ebx", 20);
+    register.print("eax");
+    register.print("ebx");*/
 }

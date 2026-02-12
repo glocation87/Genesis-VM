@@ -5,8 +5,10 @@ use crate::register::Register;
 use crate::opcode::{Instruction, OpCode, Args};
 
 pub struct VirtualMachine {
+    instructions: Vec<Instruction>,
     register: Register,
     memory: Memory,
+    rip: usize, // instruction pointer
 }
 
 impl VirtualMachine {
@@ -14,6 +16,14 @@ impl VirtualMachine {
         VirtualMachine {
             register: Register::new(),
             memory: Memory::new(),
+
+            rip: 0,
+            instructions: vec![
+                Instruction { opcode: OpCode::MOV, arg_one: Args::Strings("eax"), arg_two: Args::Integers(10) },
+                Instruction { opcode: OpCode::MOV, arg_one: Args::Strings("ebx"), arg_two: Args::Integers(20) },
+                Instruction { opcode: OpCode::PRNT, arg_one: Args::Strings("eax"), arg_two: Args::Null(None) },
+                Instruction { opcode: OpCode::PRNT, arg_one: Args::Strings("ebx"), arg_two: Args::Null(None) },
+            ]
         }
     }
 
@@ -45,6 +55,15 @@ impl VirtualMachine {
             }
             // Implement other opcodes similarly...
             _ => {}
+        }
+    }
+
+
+    pub fn run(&mut self) {
+        while self.rip < self.instructions.len() {
+            let instruction = self.instructions[self.rip];
+            self.execute(instruction);
+            self.rip += 1; // Move to the next instruction
         }
     }
 }
