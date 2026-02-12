@@ -1,5 +1,3 @@
-use std::{any::Any, ffi::c_void};
-
 pub enum OpCode {
     // Register Operations
     MOV, // MOV [to] [from]- store into register
@@ -23,19 +21,19 @@ pub enum OpCode {
 #[derive(Debug, Clone)]
 pub enum Args {
     Integers(i64),
-    Strings(String),
-    Null(),
+    Strings(&'static str),
+    Null(Option<i64>),
 }
 
 pub struct Instruction {
     pub opcode: OpCode,
-    pub argOne: Args,
-    pub argTwo: Args,
+    pub arg_one: Args,
+    pub arg_two: Args,
 }
 
 impl Instruction {      
-    pub fn new(opcode: OpCode, argOne: Args, argTwo: Args) -> Self {
-        return Instruction { opcode, argOne, argTwo };
+    pub fn new(opcode: OpCode, arg_one: Args, arg_two: Args) -> Self {
+        return Instruction { opcode, arg_one, arg_two };
     }
     
 }

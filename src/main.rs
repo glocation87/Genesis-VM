@@ -11,12 +11,11 @@ fn main() {
     let mut register = Register::new();
 
     // Example usage
-    register.mov("eax", 10);
+    /*register.mov("eax", 10);
     register.mov("ebx", 20);
     register.print("eax");
-    register.print("ebx");
-
-    let instruction = Instruction::new(OpCode::ADD, Args::Strings("eax"), argTwo: Args::Strings("ebx"))'
+    register.print("ebx");*/
     
-      
+    let instruction = Instruction::new(OpCode::MOV, Args::Strings("eax"), Args::Integers(7));    
+    let instruction = Instruction::new(OpCode::MOV, Args::Strings("ebx"), Args::Strings("eax")); // this will copy the value 
 }
