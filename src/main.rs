@@ -12,4 +12,6 @@ fn main() {
     register.mov("ebx", 20);
     register.print("eax");
     register.print("ebx");*/
+
+    vm.run();
 }

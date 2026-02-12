@@ -20,6 +20,8 @@ pub enum OpCode {
     // I/O
     PRNT = 0xA0,   // PRNT [register] - prints value in register
     PRNTA = 0xA1,  // PRNTA [register] - prints address of value in register
+
+    RET = 0xA3,    // RET - return from function, set RIP to value in RAX
 }
 
 #[derive(Debug, Copy, Clone)]
