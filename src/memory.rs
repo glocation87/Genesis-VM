@@ -35,18 +35,30 @@ impl Memory {
     }
 
     pub fn read(&self, address: usize) -> i64 {
-        if address < self.max_size {
-            self.data[address]
+        if address >= self.base_address && address < self.max_size {
+            self.data[address - self.base_address]
         } else {
             panic!("Memory address out of bounds") // Address out of bounds
         }
     }
 
     pub fn write(&mut self, address: usize, value: i64) { 
-        if address < self.max_size {
-            self.data[address] = value;
+        if address >= self.base_address && address < self.max_size {
+            self.data[address - self.base_address] = value;
         } else {
             panic!("Memory address out of bounds");
+        }
+    }
+
+    pub fn section(&self, address: usize) -> &'static str {
+        if address >= self.code_sec_start && address < self.code_sec_end {
+            "code"
+        } else if address >= self.data_sec_start && address < self.data_sec_end {
+            "data"
+        } else if address >= self.stack_sec_start && address < self.max_size {
+            "stack"
+        } else {
+            "unmapped"
         }
     }
 }
