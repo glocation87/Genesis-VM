@@ -1,0 +1,14 @@
+; count down from 5, JIF keeps looping while the flag is false
+MOV eax, 5
+MOV ebx, 1
+MOV rax, 0
+
+countdown:
+    PRNT eax
+    SUB eax, ebx
+    MOV eax, ecx
+    CMP eax, rax
+    JIF countdown
+
+PRNT eax
+HALT

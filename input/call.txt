@@ -1,0 +1,13 @@
+; park the return address in rax, RET jumps back to it
+MOV eax, 6
+MOV ebx, 7
+MOV rax, after
+JMP multiply
+
+after:
+    PRNT ecx
+    HALT
+
+multiply:
+    MUL eax, ebx
+    RET

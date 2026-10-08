@@ -1,0 +1,12 @@
+; LEA loads an address, *register reads and writes what it points at
+LEA eax, 0x40000
+MOV ebx, 1337
+
+MOV *eax, ebx
+PRNTA eax
+PRNT *eax
+
+MOV rbx, *eax
+PRNT rbx
+
+HALT

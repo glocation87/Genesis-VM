@@ -1,0 +1,14 @@
+; basic arithmetic, result of any operation lands in ecx
+MOV eax, 10
+MOV ebx, 20
+
+PRNT eax
+PRNT ebx
+
+ADD eax, ebx
+PRNT ecx
+
+MUL eax, ebx
+PRNT ecx
+
+HALT
