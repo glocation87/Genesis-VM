@@ -25,23 +25,47 @@ impl Register {
         }
     }
 
-    /*pub fn dereference(&self, register: i64) -> i64 {
+    pub fn is_register(name: &str) -> bool {
+        matches!(
+            name.to_ascii_lowercase().as_str(),
+            "eax" | "ebx" | "ecx" | "rax" | "rbx" | "rcx"
+        )
+    }
 
-    }*/
-
-    pub fn mov(&mut self, to: &'static str, value: i64) {
-        match to {
-            "eax" => self.eax = value,
-            "ebx" => self.ebx = value,
-            "ecx" => panic!("Cannot use MOV operation on ecx register"),
-            "rax" => self.rax = value,
-            "rbx" => self.rbx = value,
-            "rcx" => panic!("Cannot use MOV operation on rcx register"),
+    pub fn resolve_register_value(&self, register: &str) -> i64 {
+        match register {
+            "eax" => self.eax,
+            "ebx" => self.ebx,
+            "ecx" => self.ecx,
+            "rax" => self.rax,
+            "rbx" => self.rbx,
+            "rcx" => self.rcx,
             _ => panic!("Invalid register name"),
         }
     }
 
-    pub fn print(&self, register: &'static str) {
+    pub fn mov(&mut self, to: &str, value: i64) {
+        match to {
+            "ecx" => panic!("Cannot use MOV operation on ecx register"),
+            "rcx" => panic!("Cannot use MOV operation on rcx register"),
+            _ => self.store(to, value),
+        }
+    }
+
+    // Used by the vm to write the result registers, which MOV is not allowed to touch
+    pub fn store(&mut self, to: &str, value: i64) {
+        match to {
+            "eax" => self.eax = value,
+            "ebx" => self.ebx = value,
+            "ecx" => self.ecx = value,
+            "rax" => self.rax = value,
+            "rbx" => self.rbx = value,
+            "rcx" => self.rcx = value,
+            _ => panic!("Invalid register name"),
+        }
+    }
+
+    pub fn print(&self, register: &str) {
         match register {
             "eax" => println!("GVM EAX[ {} ]", self.eax),
             "ebx" => println!("GVM EBX[ {} ]", self.ebx),
